@@ -1,0 +1,28 @@
+<h1>Products</h1>
+<%= link_to 'New Product', new_admin_product_path, class: 'btn btn-primary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.category.name %></td>
+        <td>$<%= product.price %></td>
+        <td><%= product.stock %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_product_path(product) %> |
+          <%= link_to 'Delete', admin_product_path(product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

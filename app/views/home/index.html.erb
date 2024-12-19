@@ -1,0 +1,31 @@
+<h1>Welcome to the E-commerce App</h1>
+
+<% if user_signed_in? %>
+  <p>Hello, <%= current_user.email %>! You are logged in.</p>
+  <%= link_to 'Logout', destroy_user_session_path, 
+    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+<% else %>
+  <p>You are not logged in. <%= link_to 'Login', new_user_session_path, class: 'btn btn-success' %></p>
+<% end %>
+
+<h2 class="mt-4">Available Products</h2>
+
+<% if @products.any? %>
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= product.description %></p>
+            <p class="card-text"><strong>Price:</strong> $<%= product.price %></p>
+            <p class="card-text"><strong>Stock:</strong> <%= product.stock %></p>
+            <%= link_to 'View Details', product_path(product), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-muted">No products are available at the moment. Please check back later!</p>
+<% end %>

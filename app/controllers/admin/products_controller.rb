@@ -18,6 +18,29 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
+  def edit
+    @product = Product.find(params[:id])
+    @categories = Category.all
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to admin_products_path, notice: "Product updated successfully."
+    else
+      render :edit, alert: "Failed to update product."
+    end
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    if @product.destroy
+      redirect_to admin_categories_path, notice: "Product deleted successfully."
+    else
+      redirect_to admin_categories_path, alert: "Failed to delete category."
+    end
+  end
+
   private
 
   def product_params

@@ -1,6 +1,6 @@
 <h1><%= action_name.capitalize %> Category</h1>
 
-<%= form_with model: @category, url: admin_category_path(@category), local: true do |f| %>
+<%= form_with model: @category , url: admin_category_path(@category),local: true do |f| %>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name %>

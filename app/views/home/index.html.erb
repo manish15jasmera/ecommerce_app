@@ -2,10 +2,8 @@
 
 <% if user_signed_in? %>
   <p>Hello, <%= current_user.email %>! You are logged in.</p>
-  <%= link_to 'Logout', destroy_user_session_path, 
-    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
 <% else %>
-  <p>You are not logged in. <%= link_to 'Login', new_user_session_path, class: 'btn btn-success' %></p>
+  <p>You are not logged in.</p>
 <% end %>
 
 <h2 class="mt-4">Available Products</h2>

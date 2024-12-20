@@ -17,6 +17,28 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(category_params)
+      redirect_to admin_categories_path, notice: "Category updated successfully."
+    else
+      render :edit, alert: "Failed to update category."
+    end
+  end
+
+  def destroy
+    @category = Category.find(params[:id])
+    if @category.destroy
+      redirect_to admin_categories_path, notice: "Category deleted successfully."
+    else
+      redirect_to admin_categories_path, alert: "Failed to delete category."
+    end
+  end
+
   private
 
   def category_params

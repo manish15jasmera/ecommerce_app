@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   has_many :carts, through: :cart_items
   has_many :orders, through: :cart_items
 
+  has_many_attached :images
+
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }

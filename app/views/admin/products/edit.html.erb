@@ -1,5 +1,7 @@
 <h1><%= action_name.capitalize %> Product</h1>
 
+<%= link_to 'Back to Categories', admin_categories_path, class: 'btn btn-secondary' %> <!-- Back to Index Button -->
+
 <%= form_with model: @product, url: admin_product_path(@product), local: true do |f| %>
   <div>
     <%= f.label :name %>
@@ -24,6 +26,11 @@
   <div>
     <%= f.label :category %>
     <%= f.collection_select :category_id, @categories, :id, :name, prompt: 'Select a category' %>
+  </div>
+
+  <div>
+    <%= f.label :images, "Upload Images" %>
+    <%= f.file_field :images, multiple: true %>
   </div>
 
   <div>

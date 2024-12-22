@@ -1,6 +1,10 @@
 <h1>Products</h1>
 <%= link_to 'New Product', new_admin_product_path, class: 'btn btn-primary' %>
 
+<div class="mb-3">
+  <%= link_to 'Back to Dashboard', admin_dashboard_path, class: 'btn btn-secondary' %>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -18,6 +22,29 @@
         <td><%= product.category.name %></td>
         <td>$<%= product.price %></td>
         <td><%= product.stock %></td>
+        <td>
+          <% if product.images.attached? %>
+            <div id="carousel-<%= product.id %>" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% product.images.each_with_index do |image, index| %>
+                  <div class="carousel-item <%= 'active' if index == 0 %>">
+                    <%= image_tag image, class: 'd-block w-100', style: "max-height: 150px; object-fit: cover;" %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          <% else %>
+            <p>No images uploaded.</p>
+          <% end %>
+        </td>
         <td>
           <%= link_to 'Edit', edit_admin_product_path(product) %> |
           <%= link_to 'Delete', admin_product_path(product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>

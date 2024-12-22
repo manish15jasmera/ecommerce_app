@@ -6,6 +6,13 @@
   </div>
 
   <div>
+    <br>
+    <%= form.label :image, "Upload Image" %><br>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <br>
     <%= form.submit "Create Category", class: "btn btn-primary" %>
   </div>
 <% end %>

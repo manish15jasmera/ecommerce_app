@@ -1,10 +1,25 @@
 <h1><%= action_name.capitalize %> Category</h1>
 
-<%= form_with model: @category , url: admin_category_path(@category),local: true do |f| %>
+<%= form_with model: @category , url: admin_category_path(@category), local: true, multipart: true do |f| %>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
+ 
+  <div>
+    <br>
+    <%= f.label :image, "Upload Image" %><br>
+    <%= f.file_field :image %>
+  </div> 
+
+  <div>
+  <% if @category.image.attached? %>
+    <%= image_tag rails_blob_path(@category.image, only_path: true), size: "100x100" %>
+  <% else %>
+    No image uploaded
+  <% end %>
+  </div>
+
   <div>
     <%= f.submit %>
   </div>

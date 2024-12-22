@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Image</th> <!-- Added column for the image -->
       <th>Actions</th>
     </tr>
   </thead>
@@ -12,6 +13,13 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.name %></td>
+        <td>
+        <% if category.image.attached? %>
+          <%= image_tag rails_blob_path(category.image, only_path: true), size: "100x100" %>
+        <% else %>
+          No image uploaded
+        <% end %>
+        </td>
         <td>
           <%= link_to 'Edit', edit_admin_category_path(category) %> |
           <%= link_to 'Delete', admin_category_path(category), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>

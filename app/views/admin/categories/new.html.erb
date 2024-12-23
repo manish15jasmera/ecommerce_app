@@ -4,20 +4,18 @@
   <%= link_to 'Back to Dashboard', admin_dashboard_path, class: 'btn btn-secondary' %>
 </div>
 
-<%= form_with model: @category, url: admin_categories_path, local: true do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<%= form_with model: @category, url: admin_categories_path, local: true, class: "needs-validation" do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
-    <br>
-    <%= form.label :image, "Upload Image" %><br>
-    <%= form.file_field :image %>
+  <div class="mb-3">
+    <%= form.label :image, "Upload Image", class: "form-label" %>
+    <%= form.file_field :image, class: "form-control" %>
   </div>
 
-  <div>
-    <br>
+  <div class="mb-3">
     <%= form.submit "Create Category", class: "btn btn-primary" %>
   </div>
 <% end %>

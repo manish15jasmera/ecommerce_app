@@ -1,58 +1,71 @@
-<h1>Welcome to the E-commerce App</h1>
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Welcome to the E-commerce App</h1>
 
-<% if user_signed_in? %>
-  <p>Hello, <%= current_user.email %>! You are logged in.</p>
+  <% if user_signed_in? %>
+    <div class="alert alert-info text-center">
+      <p>Hello, <strong><%= current_user.email %></strong>! You are logged in.</p>
+    </div>
 
-  <% if current_user.admin? %> <!-- Check if the user is an admin -->
-    <%= link_to 'Go to Admin Dashboard', admin_dashboard_path, class: 'btn btn-secondary mb-3' %>
-  <% end %>
-<% else %>
-  <p>You are not logged in.</p>
-<% end %>
-
-<h2 class="mt-4">Available Products</h2>
-
-<% if @products.any? %>
-  <div class="row">
-    <% @products.each do |product| %>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><%= product.name %></h5>
-            <p class="card-text"><%= product.description %></p>
-            <p class="card-text"><strong>Price:</strong> $<%= product.price %></p>
-            <p class="card-text"><strong>Stock:</strong> <%= product.stock %></p>
-
-            <td>
-          <% if product.images.attached? %>
-            <div id="carousel-<%= product.id %>" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <% product.images.each_with_index do |image, index| %>
-                  <div class="carousel-item <%= 'active' if index == 0 %>">
-                    <%= image_tag image, class: 'd-block w-100', style: "max-height: 150px; object-fit: cover;" %>
-                  </div>
-                <% end %>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-          <% else %>
-            <p>No images uploaded.</p>
-          <% end %>
-        </td>
-
-            <%= link_to 'View Details', product_path(product), class: 'btn btn-primary' %>
-          </div>
-        </div>
+    <% if current_user.admin? %>
+      <div class="text-center mb-3">
+        <%= link_to 'Go to Admin Dashboard', admin_dashboard_path, class: 'btn btn-secondary' %>
       </div>
     <% end %>
-  </div>
-<% else %>
-  <p class="text-muted">No products are available at the moment. Please check back later!</p>
-<% end %>
+  <% else %>
+    <div class="alert alert-warning text-center">
+      <p>You are not logged in. <%= link_to 'Log in', new_user_session_path %> or <%= link_to 'Sign up', new_user_registration_path %> to explore more!</p>
+    </div>
+  <% end %>
+
+  <h2 class="mt-4">Available Products</h2>
+
+  <% if @products.any? %>
+    <div class="row mt-3">
+      <% @products.each do |product| %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <% if product.images.attached? %>
+              <div id="carousel-<%= product.id %>" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <% product.images.each_with_index do |image, index| %>
+                    <div class="carousel-item <%= 'active' if index == 0 %>">
+                      <%= image_tag image, class: 'd-block w-100', style: "height: 200px; object-fit: cover;" %>
+                    </div>
+                  <% end %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            <% else %>
+              <div class="text-center p-3">
+                <p class="text-muted">No image available</p>
+              </div>
+            <% end %>
+
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text"><%= truncate(product.description, length: 100) %></p>
+              <p class="card-text"><strong>Price:</strong> $<%= product.price %></p>
+              <p class="card-text"><strong>Stock:</strong> <%= product.stock %></p>
+
+              <div class="d-flex justify-content-between">
+                <%= link_to 'View Details', product_path(product), class: 'btn btn-primary btn-sm' %>
+                <%= link_to 'Add to Cart', product_path(product), class: 'btn btn-success btn-sm' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-secondary text-center mt-4">
+      <p>No products are available at the moment. Please check back later!</p>
+    </div>
+  <% end %>
+</div>

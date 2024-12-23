@@ -1,16 +1,39 @@
-<h1>Admin Dashboard</h1>
-<p>Welcome, <%= current_user.email %>!</p>
-<%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-secondary mb-3' %>
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Admin Dashboard</h1>
 
-<div>
-  <h3>Manage Categories</h3>
-  <%= link_to "Create Category", new_admin_category_path, class: "btn btn-primary" %>
-  <%= link_to "View Categories", admin_categories_path, class: "btn btn-secondary" %>
+  <div class="alert alert-primary text-center">
+    <p>Welcome, <strong><%= current_user.email %></strong>!</p>
+  </div>
+
+  <div class="text-end mb-3">
+    <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
+
+  <div class="row">
+    <!-- Manage Categories Section -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title text-center">Manage Categories</h3>
+          <div class="d-flex justify-content-center mt-3">
+            <%= link_to "Create Category", new_admin_category_path, class: "btn btn-primary me-2" %>
+            <%= link_to "View Categories", admin_categories_path, class: "btn btn-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manage Products Section -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title text-center">Manage Products</h3>
+          <div class="d-flex justify-content-center mt-3">
+            <%= link_to "Create Product", new_admin_product_path, class: "btn btn-primary me-2" %>
+            <%= link_to "View Products", admin_products_path, class: "btn btn-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div>
-  <h3>Manage Products</h3>
-  <%= link_to "Create Product", new_admin_product_path, class: "btn btn-primary" %>
-  <%= link_to "View Products", admin_products_path, class: "btn btn-secondary" %>
-</div>
-

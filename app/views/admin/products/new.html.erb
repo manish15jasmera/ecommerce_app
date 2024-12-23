@@ -4,40 +4,38 @@
   <%= link_to 'Back to Dashboard', admin_dashboard_path, class: 'btn btn-secondary' %>
 </div>
 
-<%= form_with model: @product, url: admin_products_path, local: true do |form| %>
-
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<%= form_with model: @product, url: admin_products_path, local: true, class: "needs-validation" do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :price %>
-    <%= form.number_field :price %>
+  <div class="mb-3">
+    <%= form.label :price, class: "form-label" %>
+    <%= form.number_field :price, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :stock %>
-    <%= form.number_field :stock %>
+  <div class="mb-3">
+    <%= form.label :stock, class: "form-label" %>
+    <%= form.number_field :stock, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :category_id %>
-    <%= form.collection_select :category_id, Category.all, :id, :name %>
+  <div class="mb-3">
+    <%= form.label :category_id, "Category", class: "form-label" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: 'Select a category' }, class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.label :images, "Upload Images" %>
-    <%= form.file_field :images, multiple: true %>
+  <div class="mb-3">
+    <%= form.label :images, "Upload Images", class: "form-label" %>
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="mb-3">
     <%= form.submit "Create Product", class: "btn btn-primary" %>
   </div>
-
 <% end %>

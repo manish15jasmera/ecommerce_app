@@ -70,11 +70,14 @@
 
               <!-- Cart Icon with Placeholder for Item Count -->
               <li class="nav-item">
-              <%= link_to '#', class: 'nav-link' do %>  <!-- Using placeholder '#' link -->                  <i class="fas fa-shopping-cart"></i>
-                  <!-- Placeholder: To be replaced with dynamic item count once cart logic is implemented -->
-                  <span class="badge bg-warning text-dark ms-2">0</span>
-                <% end %>
-              </li>
+                <%= link_to cart_path, class: 'nav-link' do %>
+                <i class="fas fa-shopping-cart"></i>
+                <!-- Display the number of items in the cart -->
+                <span class="badge bg-warning text-dark ms-2">
+                <%= cart_item_count || 0 %>
+                </span>
+              <% end %>
+</li>
 
             <% else %>
               <!-- Login Button for Guests -->

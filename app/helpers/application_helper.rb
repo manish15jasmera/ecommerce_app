@@ -9,4 +9,8 @@ module ApplicationHelper
     html += '</ul></div>'
     html.html_safe
   end
+
+  def cart_item_count
+    current_user.cart.cart_items.sum(:quantity) if user_signed_in?
+  end
 end

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'cart_items/create'
+  get 'cart_items/update'
+  get 'cart_items/destroy'
+  get 'carts/show'
   get 'admin/dashboard'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -18,4 +22,9 @@ Rails.application.routes.draw do
     resources :products
     root to: "dashboard#index"
   end
+
+  resource :cart, only: [:show]
+  resources :cart_items, only: [:create, :update, :destroy]
+
+  get 'checkout', to: 'orders#checkout'
 end

@@ -9,6 +9,8 @@ class User < ApplicationRecord
   
   after_create :create_cart
 
+  after_create :send_welcome_email
+
   validates :role, presence: true, inclusion: { in: roles.keys }
 
   # Include default devise modules. Others available are:
@@ -20,5 +22,9 @@ class User < ApplicationRecord
 
     def create_cart
       Cart.create(user: self)
+    end
+
+    def send_welcome_email
+      UserMailer.welcome_email(self).deliver_now
     end
 end

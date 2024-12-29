@@ -1,0 +1,61 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Edit Profile</h1>
+
+  <%= form_with(model: @profile, url: profile_path, method: :put, local: true) do |form| %>
+    <div class="row">
+      <!-- Profile Edit -->
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title text-center">Edit User Information</h3>
+            <div class="mb-3">
+              <%= form.label :name, class: "form-label" %>
+              <%= form.text_field :name, value: @profile.name, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :phone, class: "form-label" %>
+              <%= form.text_field :phone, value: @profile.phone, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping Address Edit -->
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title text-center">Edit Shipping Address</h3>
+            <%= fields_for :shipping_address, @shipping_address do |address_form| %>
+              <div class="mb-3">
+                <%= address_form.label :street, class: "form-label" %>
+                <%= address_form.text_field :street, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= address_form.label :city, class: "form-label" %>
+                <%= address_form.text_field :city, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= address_form.label :state, class: "form-label" %>
+                <%= address_form.text_field :state, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= address_form.label :postal_code, class: "form-label" %>
+                <%= address_form.text_field :postal_code, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= address_form.label :country, class: "form-label" %>
+                <%= address_form.text_field :country, class: "form-control" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <div class="d-flex justify-content-center mt-4">
+      <%= form.submit 'Save Changes', class: 'btn btn-success me-2' %>
+      <%= link_to 'Back to Profile', profile_path, class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
+</div>

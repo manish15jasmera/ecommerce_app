@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'profiles/edit'
+  get 'profiles/update'
   get 'cart_items/create'
   get 'cart_items/update'
   get 'cart_items/destroy'
@@ -25,6 +27,8 @@ Rails.application.routes.draw do
 
   resource :cart, only: [:show]
   resources :cart_items, only: [:create, :update, :destroy]
+
+  resource :profile, only: [:show, :edit, :update]
 
   get 'checkout', to: 'orders#checkout'
 end

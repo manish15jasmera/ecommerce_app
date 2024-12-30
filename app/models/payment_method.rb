@@ -1,6 +1,5 @@
 class PaymentMethod < ApplicationRecord
-  belongs_to :order
-
-  validates :method, presence: true
-  validates :details, presence: true 
+  has_many :orders
+  # Add validations if necessary, e.g.,
+  validates :method, presence: true, uniqueness: true
 end

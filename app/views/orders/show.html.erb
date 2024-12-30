@@ -1,0 +1,46 @@
+<h1 class="text-center my-4">Order Details</h1>
+
+<div class="container">
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Order #<%= @order.id %></h3>
+      <p><strong>Status:</strong> <%= @order.order_status.name %></p>
+      <p><strong>Total Price:</strong> <%= number_to_currency(@order.total_price) %></p>
+    </div>
+  </div>
+
+  <h3>Shipping Address</h3>
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <p><%= @order.shipping_address.street %>,</p>
+      <p><%= @order.shipping_address.city %>, <%= @order.shipping_address.state %></p>
+      <p><%= @order.shipping_address.postal_code %>, <%= @order.shipping_address.country %></p>
+    </div>
+  </div>
+
+  <h3>Order Items</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.product.name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency(item.price) %></td>
+          <td><%= number_to_currency(item.quantity * item.price) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="text-end mt-3">
+    <%= link_to 'Back to Orders', orders_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :products
     root to: "dashboard#index"
+    resources :orders, only: [:index, :show, :edit, :update]
   end
 
   resource :cart, only: [:show]
@@ -30,5 +31,6 @@ Rails.application.routes.draw do
 
   resource :profile, only: [:show, :edit, :update]
 
-  get 'checkout', to: 'orders#checkout'
+  resources :orders, only: [:index, :show, :create]  # Add routes for index, show, and create
+  get 'checkout', to: 'orders#checkout'  # Checkout route
 end

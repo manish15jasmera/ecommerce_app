@@ -1,0 +1,44 @@
+<h1>Order Details - #<%= @order.id %></h1>
+
+<h3>Customer Details</h3>
+<p><strong>Email:</strong> <%= @order.user.email %></p>
+<p><strong>Order Date:</strong> <%= @order.created_at.strftime("%d %b %Y, %I:%M %p") %></p>
+
+<h3>Shipping Address</h3>
+<p>
+  <%= @order.shipping_address.street %>, 
+  <%= @order.shipping_address.city %>, 
+  <%= @order.shipping_address.state %> - 
+  <%= @order.shipping_address.postal_code %>, 
+  <%= @order.shipping_address.country %>
+</p>
+
+<h3>Order Items</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.price) %></td>
+        <td><%= number_to_currency(item.quantity * item.price) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Total Price: <%= number_to_currency(@order.total_price) %></h3>
+
+<h3>Order Status</h3>
+<p><strong>Current Status:</strong> <%= @order.order_status.name %></p>
+
+<%= link_to 'Edit Order', edit_admin_order_path(@order), class: 'btn btn-primary' %>
+<%= link_to 'Back to Orders', admin_orders_path, class: 'btn btn-secondary' %>

@@ -1,0 +1,12 @@
+<!-- app/views/order_mailer/new_order_notification.html.erb -->
+<h1>New Order Placed</h1>
+<p>A new order has been placed by <%= @orders.last.user.email %>.</p>
+
+<p>Order Details:</p>
+<ul>
+  <% @orders.last.order_items.each do |item| %>
+    <li><%= item.product.name %> - Quantity: <%= item.quantity %> - Price: $<%= item.price %></li>
+  <% end %>
+</ul>
+
+<p><strong>Total Price: $<%= @orders.last.total_price %></strong></p>

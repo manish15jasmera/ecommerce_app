@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   enum role: { customer: 'customer', admin: 'admin' }
+  has_many :orders
   has_one :cart, dependent: :destroy
   has_many :shipping_addresses, dependent: :destroy
   has_one :profile, dependent: :destroy

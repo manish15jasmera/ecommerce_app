@@ -197,4 +197,7 @@ cart.cart_items.create!(
   price: product3.price
 )
 
+PaymentMethod.create([{ method: 'Credit Card' }, { method: 'PayPal' }, { method: 'Cash on Delivery' }])
+
+
 puts "Seeding completed successfully!"

@@ -1,3 +1,35 @@
-<h1>Checkout</h1>
-<h3>Total: $<%= @cart.cart_items.sum { |item| item.quantity * item.price } %></h3>
-<%= button_to 'Confirm Order', orders_path, method: :post, class: 'btn btn-primary' %>
+<h1 class="text-center my-4">Checkout</h1>
+
+<div class="container">
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Order Summary</h3>
+      <p><strong>Total:</strong> <%= number_to_currency(@cart.cart_items.sum { |item| item.quantity * item.price }) %></p>
+    </div>
+  </div>
+
+  <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h3 class="card-title">Shipping Address</h3>
+        <%= f.hidden_field :shipping_address_id, value: @order.shipping_address_id %>
+        <p><%= @order.shipping_address.street %>,</p>
+        <p><%= @order.shipping_address.city %>, <%= @order.shipping_address.state %></p>
+        <p><%= @order.shipping_address.postal_code %>, <%= @order.shipping_address.country %></p>
+      </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h3 class="card-title">Payment Method</h3>
+        <%= f.label :payment_method_id, 'Select Payment Method' %>
+        <%= f.select :payment_method_id, options_from_collection_for_select(PaymentMethod.all, :id, :method), prompt: 'Select Payment Method', class: 'form-select' %>
+      </div>
+    </div>
+
+    <div class="text-end">
+      <%= f.submit 'Confirm Order', class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', carts_show_path, class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
+</div>

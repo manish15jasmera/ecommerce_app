@@ -1,0 +1,17 @@
+<h1 class="text-center my-4">Your Orders</h1>
+
+<div class="container">
+  <% @orders.each do |order| %>
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h3>Order #<%= order.id %></h3>
+        <p><strong>Status:</strong> <%= order.order_status.name %></p>
+        <p><strong>Total Price:</strong> <%= number_to_currency(order.total_price) %></p>
+        <p><strong>Placed On:</strong> <%= order.created_at.strftime("%d %b %Y, %I:%M %p") %></p>
+        <div class="text-end">
+          <%= link_to 'View Order', order_path(order), class: 'btn btn-primary btn-sm' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

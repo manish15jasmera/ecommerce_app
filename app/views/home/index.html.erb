@@ -17,7 +17,7 @@
     </div>
   <% end %>
 
-  <h2 class="mt-4">Available Products</h2>
+  <h2 class="mt-4 text-center">Available Products</h2>
 
   <% if @products.any? %>
     <div class="row mt-3">
@@ -29,7 +29,7 @@
                 <div class="carousel-inner">
                   <% product.images.each_with_index do |image, index| %>
                     <div class="carousel-item <%= 'active' if index == 0 %>">
-                      <%= image_tag image, class: 'd-block w-100', style: "height: 200px; object-fit: cover;" %>
+                      <%= image_tag image, class: 'd-block w-100', style: "height: 250px; object-fit: cover;" %>
                     </div>
                   <% end %>
                 </div>
@@ -54,9 +54,9 @@
               <p class="card-text"><strong>Price:</strong> $<%= product.price %></p>
               <p class="card-text"><strong>Stock:</strong> <%= product.stock %></p>
 
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between align-items-center">
                 <%= link_to 'View Details', product_path(product), class: 'btn btn-primary btn-sm' %>
-                <%= link_to 'Add to Cart', product_path(product), class: 'btn btn-success btn-sm' %>
+                <%= render partial: "add_to_cart_form", locals: { product: product } %>
               </div>
             </div>
           </div>

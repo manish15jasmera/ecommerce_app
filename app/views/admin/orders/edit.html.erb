@@ -5,11 +5,13 @@
     </div>
     <div class="card-body">
       <%= form_with(model: @order, url: admin_order_path(@order), method: :patch, local: true) do |f| %>
+        <!-- Order Status Selection -->
         <div class="mb-4">
           <%= f.label :order_status_id, "Order Status", class: "form-label" %>
           <%= f.collection_select :order_status_id, OrderStatus.all, :id, :name, { prompt: "Select Status" }, { class: "form-select" } %>
         </div>
 
+        <!-- Action Buttons -->
         <div class="d-flex justify-content-end gap-3">
           <%= f.submit 'Update Order', class: 'btn btn-success' %>
           <%= link_to 'Cancel', admin_order_path(@order), class: 'btn btn-secondary' %>

@@ -24,29 +24,29 @@
       <% @products.each do |product| %>
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
-            <% if product.images.attached? %>
-              <div id="carousel-<%= product.id %>" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <% product.images.each_with_index do |image, index| %>
-                    <div class="carousel-item <%= 'active' if index == 0 %>">
-                      <%= image_tag image, class: 'd-block w-100', style: "height: 250px; object-fit: cover;" %>
-                    </div>
-                  <% end %>
+          <% if product.images.attached? %>
+          <div id="carousel-<%= product.id %>" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% product.images.each_with_index do |image, index| %>
+                <div class="carousel-item <%= 'active' if index == 0 %>">
+                  <%= image_tag image, class: 'd-block w-100', style: "height: 250px; object-fit: contain; background-color: #f8f9fa;" %>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-            <% else %>
-              <div class="text-center p-3">
-                <p class="text-muted">No image available</p>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        <% else %>
+          <div class="text-center p-3">
+            <p class="text-muted">No image available</p>
+          </div>
+        <% end %>
 
             <div class="card-body">
               <h5 class="card-title"><%= product.name %></h5>

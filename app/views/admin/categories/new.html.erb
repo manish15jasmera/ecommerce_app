@@ -1,21 +1,23 @@
-<h1>New Category</h1>
+<h1 class="text-center my-4 text-primary">New Category</h1>
 
-<div class="mb-3">
+<div class="mb-4">
   <%= link_to 'Back to Dashboard', admin_dashboard_path, class: 'btn btn-secondary' %>
 </div>
 
-<%= form_with model: @category, url: admin_categories_path, local: true, class: "needs-validation" do |form| %>
-  <div class="mb-3">
-    <%= form.label :name, class: "form-label" %>
-    <%= form.text_field :name, class: "form-control" %>
-  </div>
+<div class="card shadow-sm p-4 border-primary">
+  <%= form_with model: @category, url: admin_categories_path, local: true, class: "needs-validation" do |form| %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter category name" %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :image, "Upload Image", class: "form-label" %>
-    <%= form.file_field :image, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :image, "Upload Image", class: "form-label" %>
+      <%= form.file_field :image, class: "form-control" %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.submit "Create Category", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="text-end">
+      <%= form.submit "Create Category", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

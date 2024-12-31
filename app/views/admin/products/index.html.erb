@@ -1,55 +1,58 @@
-<h1>Products</h1>
-<div class="d-flex justify-content-between align-items-center mb-3">
+<h1 class="text-center my-4 text-primary">Products</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
   <%= link_to 'New Product', new_admin_product_path, class: 'btn btn-primary' %>
   <%= link_to 'Back to Dashboard', admin_dashboard_path, class: 'btn btn-secondary' %>
 </div>
 
-<table class="table table-striped table-bordered">
-  <thead class="table-dark">
-    <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Price</th>
-      <th>Stock</th>
-      <th>Images</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @products.each do |product| %>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered align-middle">
+    <thead class="table-dark">
       <tr>
-        <td><%= product.name %></td>
-        <td><%= product.category.name %></td>
-        <td>$<%= product.price %></td>
-        <td><%= product.stock %></td>
-        <td class="text-center">
-          <% if product.images.attached? %>
-            <div id="carousel-<%= product.id %>" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <% product.images.each_with_index do |image, index| %>
-                  <div class="carousel-item <%= 'active' if index == 0 %>">
-                    <%= image_tag image, class: 'd-block w-100 img-thumbnail', style: "max-height: 150px; object-fit: cover;" %>
-                  </div>
-                <% end %>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-          <% else %>
-            <span class="text-muted">No images uploaded</span>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to 'Edit', edit_admin_product_path(product), class: 'btn btn-sm btn-warning' %>
-          <%= link_to 'Delete', admin_product_path(product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
-        </td>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Images</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.category.name %></td>
+          <td><%= number_to_currency(product.price) %></td>
+          <td><%= product.stock %></td>
+          <td class="text-center">
+            <% if product.images.attached? %>
+              <div id="carousel-<%= product.id %>" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <% product.images.each_with_index do |image, index| %>
+                    <div class="carousel-item <%= 'active' if index.zero? %>">
+                      <%= image_tag image, class: 'd-block w-100 img-thumbnail', style: "max-height: 150px; object-fit: cover;" %>
+                    </div>
+                  <% end %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= product.id %>" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            <% else %>
+              <span class="text-muted">No images uploaded</span>
+            <% end %>
+          </td>
+          <td class="text-nowrap">
+            <%= link_to 'Edit', edit_admin_product_path(product), class: 'btn btn-sm btn-warning me-2' %>
+            <%= link_to 'Delete', admin_product_path(product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,50 +1,54 @@
-<div class="container mt-4">
+<div class="container mt-5">
   <h1 class="text-center mb-4">Edit Profile</h1>
 
   <%= form_with(model: @profile, url: profile_path, method: :put, local: true) do |form| %>
-    <div class="row">
+    <div class="row g-4">
       <!-- Profile Edit -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm">
+      <div class="col-md-6">
+        <div class="card shadow-sm border-primary">
+          <div class="card-header text-white bg-primary text-center">
+            <h5 class="mb-0">Edit User Information</h5>
+          </div>
           <div class="card-body">
-            <h3 class="card-title text-center">Edit User Information</h3>
             <div class="mb-3">
               <%= form.label :name, class: "form-label" %>
-              <%= form.text_field :name, value: @profile.name, class: "form-control" %>
+              <%= form.text_field :name, value: @profile.name, class: "form-control", placeholder: "Enter your name" %>
             </div>
             <div class="mb-3">
               <%= form.label :phone, class: "form-label" %>
-              <%= form.text_field :phone, value: @profile.phone, class: "form-control" %>
+              <%= form.text_field :phone, value: @profile.phone, class: "form-control", placeholder: "Enter your phone number" %>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Shipping Address Edit -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm">
+      <div class="col-md-6">
+        <div class="card shadow-sm border-success">
+          <div class="card-header text-white bg-success text-center">
+            <h5 class="mb-0">Edit Shipping Address</h5>
+          </div>
           <div class="card-body">
-            <h3 class="card-title text-center">Edit Shipping Address</h3>
             <%= fields_for :shipping_address, @shipping_address do |address_form| %>
               <div class="mb-3">
                 <%= address_form.label :street, class: "form-label" %>
-                <%= address_form.text_field :street, class: "form-control" %>
+                <%= address_form.text_field :street, class: "form-control", placeholder: "Enter street" %>
               </div>
               <div class="mb-3">
                 <%= address_form.label :city, class: "form-label" %>
-                <%= address_form.text_field :city, class: "form-control" %>
+                <%= address_form.text_field :city, class: "form-control", placeholder: "Enter city" %>
               </div>
               <div class="mb-3">
                 <%= address_form.label :state, class: "form-label" %>
-                <%= address_form.text_field :state, class: "form-control" %>
+                <%= address_form.text_field :state, class: "form-control", placeholder: "Enter state" %>
               </div>
               <div class="mb-3">
                 <%= address_form.label :postal_code, class: "form-label" %>
-                <%= address_form.text_field :postal_code, class: "form-control" %>
+                <%= address_form.text_field :postal_code, class: "form-control", placeholder: "Enter postal code" %>
               </div>
               <div class="mb-3">
                 <%= address_form.label :country, class: "form-label" %>
-                <%= address_form.text_field :country, class: "form-control" %>
+                <%= address_form.text_field :country, class: "form-control", placeholder: "Enter country" %>
               </div>
             <% end %>
           </div>
@@ -53,9 +57,9 @@
     </div>
 
     <!-- Save Button -->
-    <div class="d-flex justify-content-center mt-4">
-      <%= form.submit 'Save Changes', class: 'btn btn-success me-2' %>
-      <%= link_to 'Back to Profile', profile_path, class: 'btn btn-secondary' %>
+    <div class="d-flex justify-content-center mt-5">
+      <%= form.submit 'Save Changes', class: 'btn btn-success btn-lg me-3' %>
+      <%= link_to 'Back to Profile', profile_path, class: 'btn btn-secondary btn-lg' %>
     </div>
   <% end %>
 </div>

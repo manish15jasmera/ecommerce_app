@@ -3,11 +3,11 @@ class ProfilesController < ApplicationController
   before_action :set_profile_and_shipping_address
 
   def show
-    # Displays profile and associated shipping addresses
+    
   end
 
   def edit
-    # Provides form to edit profile and add/update shipping addresses
+    
   end
 
   def update
